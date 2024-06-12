@@ -11,10 +11,7 @@ import { RouterModule } from "@angular/router";
   template: `
   <main>
     <app-header></app-header>
-  <section class='content'>
-    <router-outlet>   
-    </router-outlet>
-  </section>
+    <router-outlet></router-outlet>
   </main>
   `,
   styleUrls: ['./app.component.css'],
