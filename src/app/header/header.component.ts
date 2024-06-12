@@ -6,9 +6,9 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   template: `
-    <p>
-      header works!
-    </p>
+<header class="brand-name">
+  <img class="brand-logo" src="/assets/logo.svg" alt="logo" aria-hidden="true">
+</header>
   `,
   styleUrls: ['./header.component.css']
 })
