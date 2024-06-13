@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { RmCharacter } from "../../interfaces/rm-character";
+import { Character, RmCharacter } from "../../interfaces/rm-character";
 
 @Injectable({
   providedIn: 'root'
@@ -10,21 +10,21 @@ export class RMCharactersService {
 
   constructor() { }
 
-  async getAllCharacters(): Promise<RmCharacter[]> {
-    const options = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'Application/json'
-      },
-    }
-    const response = await fetch(`${this.url}/character`, options)
+  async getAllCharacters(): Promise<Character[]> {
+      const options = {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'Application/json'
+        },
+      }
+      const response = await fetch(`${this.url}/character`, options)
 
-    if (!response.ok) {
-      throw new Error('Network response was not ok')
-    }
+      if (!response.ok) {
+        throw new Error('Network response was not ok')
+      }
 
-    const data = await response.json()    
+      const data = await response.json()
 
-    return data.results ?? []
+      return data.results ?? []
   }
 }

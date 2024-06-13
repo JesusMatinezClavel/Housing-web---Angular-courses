@@ -5,7 +5,7 @@ import { HousingLocationComponent } from "../housing-location/housing-location.c
 import { CharacterCardComponent } from "../character-card/character-card.component";
 
 import { HousingLocation } from "../interfaces/housing-location";
-import { RmCharacter } from "../interfaces/rm-character";
+import { Character, RmCharacter } from "../interfaces/rm-character";
 
 import { HousingService } from "../services/housing/housing.service";
 import { RMCharactersService } from '../services/characters/rmcharacters.service';
@@ -22,11 +22,18 @@ import { RMCharactersService } from '../services/characters/rmcharacters.service
       </form>
     </section>
     <section class="results">
-      <app-character-card></app-character-card>
-      <!-- <app-housing-location 
+    <ng-container *ngIf="!rmCharactersList || rmCharactersList.length === 0">
+  <p>Loading characters...</p>
+</ng-container>
+<ng-container *ngIf="rmCharactersList && rmCharactersList.length > 0">
+  <app-character-card *ngFor="let rmCharacter of rmCharactersList"
+                      [rmCharacter]="rmCharacter">
+  </app-character-card>
+</ng-container>
+      <app-housing-location 
       *ngFor="let housingLocation of housingLocationList" 
       [housingLocation]="housingLocation">   
-      </app-housing-location> -->
+      </app-housing-location>
     </section>
   `,
   styleUrls: ['./home.component.css'],
@@ -35,12 +42,16 @@ export class HomeComponent {
   housingLocationList: HousingLocation[] = []
   housingService: HousingService = inject(HousingService)
 
-  rmCharactersList: RmCharacter[] = []
+  rmCharactersList: Character[] = []
   rmCharactersService: RMCharactersService = inject(RMCharactersService)
 
   constructor() {
     this.housingLocationList = this.housingService.getAllHousingLocations()
-    this.loadRmCharacters()
+    setTimeout(() => {
+      this.loadRmCharacters()
+      console.log('damelo todo' + this.rmCharactersList);
+
+    }, 3000);
   }
 
   async loadRmCharacters() {
