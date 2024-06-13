@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { HousingLocation } from "../app/housing-location";
+import { HousingLocation } from "../../interfaces/housing-location";
 
 @Injectable({
   providedIn: 'root'
@@ -121,7 +121,6 @@ export class HousingService {
   }
 
   submitApplication(firstName: string, lastName:string, email: string){
-    console.log(firstName, lastName, email);
-    
+    console.log(firstName, lastName, email);    
   }
 }

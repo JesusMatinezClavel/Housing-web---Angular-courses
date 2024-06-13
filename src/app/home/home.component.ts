@@ -2,8 +2,8 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { HousingLocationComponent } from "../housing-location/housing-location.component";
-import { HousingLocation } from "../housing-location";
-import { HousingService } from "../housing.service";
+import { HousingLocation } from "../interfaces/housing-location";
+import { HousingService } from "../services/housing/housing.service";
 
 @Component({
   selector: 'app-home',
