@@ -1,3 +1,10 @@
+export interface Info {
+    count: number,
+    pages: number,
+    next: string,
+    prev: null
+}
+
 export interface Origin {
     name: string,
     url: string
@@ -8,7 +15,7 @@ export interface Location {
     url: string
 }
 
-export interface RmCharacter {
+export interface Character {
     id: number,
     name: string,
     status: string,
@@ -21,4 +28,9 @@ export interface RmCharacter {
     episodes: [string],
     url: string,
     created: Date
+}
+
+export interface RmCharacter {
+    info: Info,
+    results: [Character]
 }

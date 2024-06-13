@@ -2,8 +2,12 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { HousingLocationComponent } from "../housing-location/housing-location.component";
+
 import { HousingLocation } from "../interfaces/housing-location";
+import { RmCharacter } from "../interfaces/rm-character";
+
 import { HousingService } from "../services/housing/housing.service";
+import { RMCharactersService } from '../services/characters/rmcharacters.service';
 
 @Component({
   selector: 'app-home',
@@ -29,7 +33,19 @@ export class HomeComponent {
   housingLocationList: HousingLocation[] = []
   housingService: HousingService = inject(HousingService)
 
+  rmCharactersList: RmCharacter[] = []
+  rmCharactersService: RMCharactersService = inject(RMCharactersService)
+
   constructor() {
     this.housingLocationList = this.housingService.getAllHousingLocations()
+    this.loadRmCharacters()    
+  }
+
+  async loadRmCharacters() {
+    try {
+      this.rmCharactersList = await this.rmCharactersService.getAllCharacters()
+    } catch (error) {
+      console.log(error);
+    }
   }
 }
