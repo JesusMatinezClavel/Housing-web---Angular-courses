@@ -11,20 +11,34 @@ export class RMCharactersService {
   constructor() { }
 
   async getAllCharacters(): Promise<Character[]> {
-      const options = {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'Application/json'
-        },
-      }
-      const response = await fetch(`${this.url}/character`, options)
+    const options = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'Application/json'
+      },
+    }
+    const response = await fetch(`${this.url}/character`, options)
 
-      if (!response.ok) {
-        throw new Error('Network response was not ok')
-      }
+    if (!response.ok) {
+      throw new Error('Network response was not ok')
+    }
 
-      const data = await response.json()
+    const data = await response.json()
 
-      return data.results ?? []
+    return data.results ?? []
+  }
+
+  async getCharacterById(id: number): Promise<Character> {
+    const response = await fetch(`${this.url}/character/${id}`)
+
+    if (!response.ok) {
+      throw new Error('Network response was not ok')
+    }
+
+    const data = await response.json()
+    console.log(data);
+    
+
+    return data ?? undefined
   }
 }

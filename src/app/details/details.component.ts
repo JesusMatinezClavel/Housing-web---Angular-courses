@@ -5,13 +5,16 @@ import { HousingService } from "../services/housing/housing.service";
 import { HousingLocation } from "../interfaces/housing-location";
 import { FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
 
+import { RMCharactersService } from "../services/characters/rmcharacters.service";
+import { Character } from "../interfaces/rm-character";
+
 @Component({
   selector: 'app-details',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   template: `
   <article>
-    <img class="listing-photo" [src]="housingLocation?.photo" alt="Housing Photo">
+    <!-- <img class="listing-photo" [src]="housingLocation?.photo" alt="Housing Photo">
     <section class="listing-description">
       <h2 class="listing-heading">{{housingLocation?.name}}</h2>
       <p class="listing-location">{{housingLocation?.city}}, {{housingLocation?.state}}</p>
@@ -35,7 +38,16 @@ import { FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
         <input id="email" type="email" formControlName='email'/>
         <button class="primary" type="submit">Apply Now</button>
       </form>
-    </section>
+    </section> -->
+    <section class="listing">
+  <img class="listing-photo" [src]="rmCharacter?.image" alt="photo of {{rmCharacter?.name}}">
+  <h2 class="listing-heading">{{rmCharacter?.name}}</h2>
+  <p class="listing-heading">{{rmCharacter?.status}}</p>
+  <p class="listing-heading">{{rmCharacter?.gender}}</p>
+  <p class="listing-location">  <a class="listing-features" [href]="rmCharacter?.location?.url">{{rmCharacter?.location?.name}}</a></p>
+  <p class="listing-features">{{rmCharacter?.species}}</p>
+  <a class="listing-features" [href]="rmCharacter?.url">-> More Information here <-</a>
+</section>
   </article>
   `,
   styleUrls: ['./details.component.css']
@@ -45,6 +57,10 @@ export class DetailsComponent {
   route: ActivatedRoute = inject(ActivatedRoute)
   housingService = inject(HousingService)
   housingLocation: HousingLocation | undefined
+
+  rmCharacterService = inject(RMCharactersService)
+  rmCharacter: Character | undefined
+
 
   applyForm = new FormGroup({
     firstName: new FormControl(''),
@@ -63,5 +79,21 @@ export class DetailsComponent {
   constructor() {
     const housingLocationsId = Number(this.route.snapshot.params['id'])
     this.housingLocation = this.housingService.getHousingLocationsById(housingLocationsId)
+    if (this.rmCharacter === undefined) {
+      this.loadCharacter()
+    }
   }
+
+  async loadCharacter() {
+    try {
+      const rmCharacterId = Number(this.route.snapshot.params['id'])
+
+      return this.rmCharacter = await this.rmCharacterService.getCharacterById(rmCharacterId)
+
+    } catch (error) {
+      return error
+    }
+  }
+
+
 }
