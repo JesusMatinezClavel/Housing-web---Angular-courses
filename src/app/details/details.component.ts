@@ -13,7 +13,7 @@ import { Character } from "../interfaces/rm-character";
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   template: `
-  <article>
+  <!-- <article> -->
     <!-- <img class="listing-photo" [src]="housingLocation?.photo" alt="Housing Photo">
     <section class="listing-description">
       <h2 class="listing-heading">{{housingLocation?.name}}</h2>
@@ -39,16 +39,58 @@ import { Character } from "../interfaces/rm-character";
         <button class="primary" type="submit">Apply Now</button>
       </form>
     </section> -->
-    <section class="listing">
+    <div class="details-design">
+      <div class="details-info">
+        <table class="info-table">
+          <div class="cell">
+            <tr>
+                <th>Name</th>
+                <div class="separator"></div>
+                <td>{{rmCharacter?.name}}</td>
+            </tr>
+            </div>
+                      <div class="cell">
+            <tr>
+                <th>Status</th>
+                <div class="separator"></div>
+                <td>{{rmCharacter?.status}}</td>
+            </tr>
+                        </div>
+                      <div class="cell">
+            <tr>
+                <th>Gender</th>
+                <div class="separator"></div>
+                <td>{{rmCharacter?.gender}}</td>
+            </tr>
+                        </div>
+                      <div class="cell">
+            <tr>
+                <th>Especie</th>
+                <div class="separator"></div>
+                <td>{{rmCharacter?.species}}</td>
+            </tr>
+                        </div>
+                      <div class="cell">
+            <tr>
+                <th>Location</th>
+                <div class="separator"></div>
+                <td><a class="listing-features" [href]="rmCharacter?.location?.url">{{rmCharacter?.location?.name}}</a></td>
+            </tr>
+                        </div>
+                      <div class="cell">
+            <tr>
+                <th>Episodes</th>
+                <div class="separator"></div>
+                <td><a class="listing-features" [href]="rmCharacter?.url">-> Click to see the episode's links <-</a></td>
+            </tr>
+            </div>
+        </table>
+      </div>
+      <div class="details-photo">
   <img class="listing-photo" [src]="rmCharacter?.image" alt="photo of {{rmCharacter?.name}}">
-  <h2 class="listing-heading">{{rmCharacter?.name}}</h2>
-  <p class="listing-heading">{{rmCharacter?.status}}</p>
-  <p class="listing-heading">{{rmCharacter?.gender}}</p>
-  <p class="listing-location">  <a class="listing-features" [href]="rmCharacter?.location?.url">{{rmCharacter?.location?.name}}</a></p>
-  <p class="listing-features">{{rmCharacter?.species}}</p>
-  <a class="listing-features" [href]="rmCharacter?.url">-> More Information here <-</a>
-</section>
-  </article>
+  </div> 
+</div>
+  <!-- </article> -->
   `,
   styleUrls: ['./details.component.css']
 })
