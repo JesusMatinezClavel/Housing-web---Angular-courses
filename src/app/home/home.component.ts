@@ -15,25 +15,25 @@ import { RMCharactersService } from '../services/characters/rmcharacters.service
   standalone: true,
   imports: [CommonModule, HousingLocationComponent, CharacterCardComponent],
   template: `
-    <section  class='content'>
+    <div  class='home-Input'>
       <form>
-        <input type='text' placeholder="Filter by city"/>
-        <button class="primary" type="button">Search</button>
+        <input class="input-Text" type='text' placeholder="Filter by name"/>
+        <button class="input-Button" type="button">Search</button>
       </form>
-    </section>
-    <section class="results">
+</div>
+    <section class="home-Body">
     <ng-container *ngIf="!rmCharactersList || rmCharactersList.length === 0">
-  <p>Loading characters...</p>
+  <p><img src="../../assets/Rick&MortyTitle.png" alt=""></p>
 </ng-container>
 <ng-container *ngIf="rmCharactersList && rmCharactersList.length > 0">
   <app-character-card *ngFor="let rmCharacter of rmCharactersList"
                       [rmCharacter]="rmCharacter">
   </app-character-card>
 </ng-container>
-      <app-housing-location 
+      <!-- <app-housing-location 
       *ngFor="let housingLocation of housingLocationList" 
       [housingLocation]="housingLocation">   
-      </app-housing-location>
+      </app-housing-location> -->
     </section>
   `,
   styleUrls: ['./home.component.css'],
