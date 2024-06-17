@@ -1,4 +1,4 @@
-.listing {
+/* .listing {
     background: var(--accent-color);
     border-radius: 30px;
     padding-bottom: 30px;
@@ -28,4 +28,55 @@
   section.listing a::after {
     content: "\203A";
     margin-left: 5px;
+  } */
+
+.carCard {
+
+  height: auto;
+  width: auto;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  margin: 1em;
+  box-shadow: .2em .1em .2em .2em rgba(128, 128, 128, 0.295);
+
+  border-radius: .5em;
+  transition: .2s;
+  &:hover{
+    transform: translateY(-.5em);
+    box-shadow: .6em .4em .4em .3em rgba(128, 128, 128, 0.247);
+    transition: .2s;
   }
+}
+
+.carCard-content {
+  height: 5em;
+  width: 100%;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  
+  background-color: #00b5cc;
+
+  border-bottom-left-radius: 0.5em;
+  border-bottom-right-radius: 0.5em;
+}
+
+.carCard img {
+  width: 100%;
+  height: auto;
+  border-top-left-radius: 0.5em;
+  border-top-right-radius: 0.5em;
+}
+
+a {
+  color: #bce240;
+  &:hover {
+    color: #b6e327;
+  }
+}

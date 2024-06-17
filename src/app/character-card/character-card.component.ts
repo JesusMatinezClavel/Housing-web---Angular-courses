@@ -10,12 +10,14 @@ import { RouterModule } from "@angular/router";
   standalone: true,
   imports: [CommonModule, RouterModule],
   template: `
-<section class="listing">
-  <img class="listing-photo" [src]="rmCharacter.image" alt="Exterior photo of {{rmCharacter.name}}">
-  <h2 class="listing-heading">{{rmCharacter.name}}</h2>
-  <p class="listing-location">{{rmCharacter.species}}</p>
-  <a [routerLink]="['/details', rmCharacter.id]">Learn more</a>
-</section>
+  <div class="carCard">
+    <img class="listing-photo" [src]="rmCharacter.image" alt="Exterior photo of {{rmCharacter.name}}">
+    <div class="carCard-content">
+    <h2 class="listing-heading">{{rmCharacter.name}}</h2>
+    <p class="listing-location">{{rmCharacter.species}}</p>
+    <a [routerLink]="['/details', rmCharacter.id]">Learn more</a>
+    </div>
+  </div>
   `,
   styleUrls: ['./character-card.component.css']
 })

@@ -79,9 +79,10 @@ form{
   border-radius: .5em;
   border: 0em;
   padding: 1em;
+  background-color: #b7f7ff;
   &:hover{
     border: .1em solid #38838d31;
-    background-color: #52ebff;
+    background-color: #72efff;
   }
   &:active{
     transform: translateY(.1em);
