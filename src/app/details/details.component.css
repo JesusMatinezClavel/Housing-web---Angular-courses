@@ -75,6 +75,40 @@
   }
 }
 
+.app-details{
+  min-height: 80vh;
+  height: auto;
+  width: 100vw;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background:url(../../assets/Screen-R&M.png) no-repeat center;
+  position: relative;
+  overflow: hidden;
+}
+
+.app-details::before,
+.app-details::after{
+  content: '';
+  position: absolute;
+
+  top: 0;
+  width: 20vw;
+  height:100%;
+  background-color: rgba(128, 128, 128, 0.226);
+  z-index: 1;
+}
+
+.app-details::before{
+  left: 0
+}
+
+.app-details::after{
+  right: 0;
+}
+
 .details-design {
   display: flex;
   justify-content: center;

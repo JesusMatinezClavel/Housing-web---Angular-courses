@@ -39,73 +39,70 @@ import { Character } from "../interfaces/rm-character";
         <button class="primary" type="submit">Apply Now</button>
       </form>
     </section> -->
-  <!-- </article> -->
-   <div class="details-design">
-    <div class="details-card">
-      <div class="details-info">
-        <table class="info-table">
-          <div class="cell">
-            <tr>
-              <th>Name</th>
-              <div class="separator"></div>
-              <td>{{ rmCharacter?.name }}</td>
-            </tr>
-          </div>
-          <div class="cell">
-            <tr>
-              <th>Status</th>
-              <div class="separator"></div>
-              <td>{{ rmCharacter?.status }}</td>
-            </tr>
-          </div>
-          <div class="cell">
-            <tr>
-              <th>Gender</th>
-              <div class="separator"></div>
-              <td>{{ rmCharacter?.gender }}</td>
-            </tr>
-          </div>
-          <div class="cell">
-            <tr>
-              <th>Especie</th>
-              <div class="separator"></div>
-              <td>{{ rmCharacter?.species }}</td>
-            </tr>
-          </div>
-          <div class="cell">
-            <tr>
-              <th>Location</th>
-              <div class="separator"></div>
-              <td>
-                <a
-                  class="listing-features"
-                  [href]="rmCharacter?.location?.url"
-                  >{{ rmCharacter?.location?.name }}</a
-                >
-              </td>
-            </tr>
-          </div>
-          <div class="cell">
-            <tr>
-              <th>Episodes</th>
-              <div class="separator"></div>
-              <td>
-                <a class="listing-features" [href]="rmCharacter?.url"
-                  >-> Click to see the episode's links <-</a
-                >
-              </td>
-            </tr>
-          </div>
-        </table>
+    <!-- </article> -->
+    <div class="app-details">
+      <div class="details-design" *ngIf="rmCharacter === undefined">
+        <img src="../../evil-morty.png" alt="Loading morty" />
       </div>
-      <div class="details-photo">
-        <img
-          class="listing-photo"
-          [src]="rmCharacter?.image"
-          alt="photo of {{ rmCharacter?.name }}"
-        />
+      <div class="details-design" *ngIf="rmCharacter !== undefined">
+        <div class="details-card">
+          <div class="details-info">
+            <table class="info-table">
+              <div class="cell">
+                <tr>
+                  <th>Name</th>
+                  <div class="separator"></div>
+                  <td>{{ rmCharacter.name }}</td>
+                </tr>
+              </div>
+              <div class="cell">
+                <tr>
+                  <th>Status</th>
+                  <div class="separator"></div>
+                  <td>{{ rmCharacter.status }}</td>
+                </tr>
+              </div>
+              <div class="cell">
+                <tr>
+                  <th>Gender</th>
+                  <div class="separator"></div>
+                  <td>{{ rmCharacter.gender }}</td>
+                </tr>
+              </div>
+              <div class="cell">
+                <tr>
+                  <th>Especie</th>
+                  <div class="separator"></div>
+                  <td>{{ rmCharacter.species }}</td>
+                </tr>
+              </div>
+              <div class="cell">
+                <tr>
+                  <th>Location</th>
+                  <div class="separator"></div>
+                  <td>
+                    {{ rmCharacter.location.name }}
+                  </td>
+                </tr>
+              </div>
+              <div class="cell">
+                <tr>
+                  <th>Episodes</th>
+                  <div class="separator"></div>
+                  <td>Appeared in {{ rmCharacter.episode.length }} episodes</td>
+                </tr>
+              </div>
+            </table>
+          </div>
+          <div class="details-photo">
+            <img
+              class="listing-photo"
+              [src]="rmCharacter.image"
+              alt="photo of {{ rmCharacter.name }}"
+            />
+          </div>
+        </div>
       </div>
-    </div>
     </div>
   `,
   styleUrls: ["./details.component.css"],

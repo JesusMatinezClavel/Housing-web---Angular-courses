@@ -25,34 +25,79 @@ button {
   background: var(--primary-color);
   color: white;
   border-radius: 8px;
-}
+} */
 
 @media (min-width: 500px) and (max-width: 768px) {
-  .results {
-    grid-template-columns: repeat(2, 1fr);
+  .app-home{
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
-  input[type="text"] {
-    width: 70%;
-  }
+  
 }
 
 @media (max-width: 499px) {
-  .results {
-    grid-template-columns: 1fr;
+  .app-home{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
   }
-} */
 
+}
 
-.home-Input{
+.app-home{
+  min-height: 80vh;
+  height: auto;
+  width: 100vw;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  background:url(../../assets/Screen-R&M.png) no-repeat center;
+  position: relative;
+  overflow: hidden;
+}
+
+.app-home::before,
+.app-home::after{
+  content: '';
+  position: absolute;
+
+  top: 0;
+  width: 6vw;
+  height:100%;
+  background-color: rgba(128, 128, 128, 0.226);
+  z-index: 1;
+}
+
+.app-home::before{
+  left: 0
+}
+
+.app-home::after{
+  right: 0;
+}
+
+.home-Input {
   min-height: 3em;
   width: 100vw;
+
+  position: relative;
 
   padding: 1em;
 }
 
-form{
+img {
+  height: 20em;
+  width: auto;
+}
+
+form {
   display: flex;
-  justify-content: start;
+  justify-content: center;
   align-items: center;
 }
 
@@ -60,14 +105,17 @@ form{
   height: 2em;
   width: 30em;
 
-  margin: .5em;
-  padding: .3em;
+  margin: 0.5em;
+  padding: 0.3em;
 
-  border: 0em;
-  border-bottom: .1em solid black;
+  background: rgba(255, 255, 255, 0.185);
+
+  border: none;
+  outline: none;
+  border-bottom: 0.1em solid black;
 }
 
-.input-Button{
+.input-Button {
   height: 2.8em;
   min-width: 3em;
   width: auto;
@@ -76,21 +124,21 @@ form{
   justify-content: center;
   align-items: center;
 
-  border-radius: .5em;
-  border: 0em;
+  border-radius: 0.5em;
+  border: .1em solid rgba(128, 128, 128, 0.301);
   padding: 1em;
   background-color: #b7f7ff;
-  &:hover{
-    border: .1em solid #38838d31;
+  &:hover {
+    border: 0.1em solid #38838d31;
     background-color: #72efff;
   }
-  &:active{
-    transform: translateY(.1em);
-    box-shadow: inset 0em 0em .2em .1em grey;
+  &:active {
+    transform: translateY(0.1em);
+    box-shadow: inset 0em 0em 0.5em 0.1em grey;
   }
 }
 
-.home-Body{
+.home-Body {
   display: flex;
   justify-content: center;
   align-items: center;

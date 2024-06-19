@@ -36,8 +36,6 @@ export class RMCharactersService {
     }
 
     const data = await response.json()
-    console.log(data);
-
 
     return data ?? undefined
   }
