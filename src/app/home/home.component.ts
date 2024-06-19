@@ -17,8 +17,8 @@ import { RMCharactersService } from '../services/characters/rmcharacters.service
   template: `
     <div  class='home-Input'>
       <form>
-        <input class="input-Text" type='text' placeholder="Filter by name"/>
-        <button class="input-Button" type="button">Search</button>
+      <input class="input-Text" type="text" placeholder="Filter by name" #filter>
+        <button class="input-Button" type="button" (click)="filteredResults(filter.value)">Search</button>
       </form>
 </div>
     <section class="home-Body">
@@ -26,7 +26,7 @@ import { RMCharactersService } from '../services/characters/rmcharacters.service
   <p><img src="../../assets/Rick&MortyTitle.png" alt=""></p>
 </ng-container>
 <ng-container *ngIf="rmCharactersList && rmCharactersList.length > 0">
-  <app-character-card *ngFor="let rmCharacter of rmCharactersList"
+  <app-character-card *ngFor="let rmCharacter of filteredCharacterList"
                       [rmCharacter]="rmCharacter">
   </app-character-card>
 </ng-container>
@@ -45,13 +45,26 @@ export class HomeComponent {
   rmCharactersList: Character[] = []
   rmCharactersService: RMCharactersService = inject(RMCharactersService)
 
-  constructor() {
-    this.housingLocationList = this.housingService.getAllHousingLocations()
-    setTimeout(() => {
-      this.loadRmCharacters()
-      console.log('damelo todo' + this.rmCharactersList);
+  filteredCharacterList: Character[] = []
 
-    }, 3000);
+  constructor() {
+
+    this.housingLocationList = this.housingService.getAllHousingLocations()
+    if (this.rmCharactersList.length === 0) {
+      this.loadRmCharacters()
+    }
+
+    setTimeout(() => {
+      this.filteredCharacterList = this.rmCharactersList
+    }, 100);
+  }
+
+  filteredResults(text: string) {
+    if (!text) this.filteredCharacterList = this.rmCharactersList
+
+    this.filteredCharacterList = this.rmCharactersList.filter(
+      character => character?.name.toLocaleLowerCase().includes(text.toLocaleLowerCase())
+    )
   }
 
   async loadRmCharacters() {
