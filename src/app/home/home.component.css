@@ -74,11 +74,13 @@ button {
 }
 
 .app-home::before{
-  left: 0
+  left: 0;
+  border-right: .1em solid grey;
 }
 
 .app-home::after{
   right: 0;
+  border-left: .1em solid grey;
 }
 
 .home-Input {
