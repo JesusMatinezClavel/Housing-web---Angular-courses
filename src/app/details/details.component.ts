@@ -1,5 +1,5 @@
-import { Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, inject } from "@angular/core";
+import { CommonModule } from "@angular/common";
 import { ActivatedRoute } from "@angular/router";
 import { HousingService } from "../services/housing/housing.service";
 import { HousingLocation } from "../interfaces/housing-location";
@@ -9,11 +9,11 @@ import { RMCharactersService } from "../services/characters/rmcharacters.service
 import { Character } from "../interfaces/rm-character";
 
 @Component({
-  selector: 'app-details',
+  selector: "app-details",
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   template: `
-  <!-- <article> -->
+    <!-- <article> -->
     <!-- <img class="listing-photo" [src]="housingLocation?.photo" alt="Housing Photo">
     <section class="listing-description">
       <h2 class="listing-heading">{{housingLocation?.name}}</h2>
@@ -39,103 +39,117 @@ import { Character } from "../interfaces/rm-character";
         <button class="primary" type="submit">Apply Now</button>
       </form>
     </section> -->
-    <div class="details-design">
+  <!-- </article> -->
+   <div class="details-design">
+    <div class="details-card">
       <div class="details-info">
         <table class="info-table">
           <div class="cell">
             <tr>
-                <th>Name</th>
-                <div class="separator"></div>
-                <td>{{rmCharacter?.name}}</td>
+              <th>Name</th>
+              <div class="separator"></div>
+              <td>{{ rmCharacter?.name }}</td>
             </tr>
-            </div>
-                      <div class="cell">
+          </div>
+          <div class="cell">
             <tr>
-                <th>Status</th>
-                <div class="separator"></div>
-                <td>{{rmCharacter?.status}}</td>
+              <th>Status</th>
+              <div class="separator"></div>
+              <td>{{ rmCharacter?.status }}</td>
             </tr>
-                        </div>
-                      <div class="cell">
+          </div>
+          <div class="cell">
             <tr>
-                <th>Gender</th>
-                <div class="separator"></div>
-                <td>{{rmCharacter?.gender}}</td>
+              <th>Gender</th>
+              <div class="separator"></div>
+              <td>{{ rmCharacter?.gender }}</td>
             </tr>
-                        </div>
-                      <div class="cell">
+          </div>
+          <div class="cell">
             <tr>
-                <th>Especie</th>
-                <div class="separator"></div>
-                <td>{{rmCharacter?.species}}</td>
+              <th>Especie</th>
+              <div class="separator"></div>
+              <td>{{ rmCharacter?.species }}</td>
             </tr>
-                        </div>
-                      <div class="cell">
+          </div>
+          <div class="cell">
             <tr>
-                <th>Location</th>
-                <div class="separator"></div>
-                <td><a class="listing-features" [href]="rmCharacter?.location?.url">{{rmCharacter?.location?.name}}</a></td>
+              <th>Location</th>
+              <div class="separator"></div>
+              <td>
+                <a
+                  class="listing-features"
+                  [href]="rmCharacter?.location?.url"
+                  >{{ rmCharacter?.location?.name }}</a
+                >
+              </td>
             </tr>
-                        </div>
-                      <div class="cell">
+          </div>
+          <div class="cell">
             <tr>
-                <th>Episodes</th>
-                <div class="separator"></div>
-                <td><a class="listing-features" [href]="rmCharacter?.url">-> Click to see the episode's links <-</a></td>
+              <th>Episodes</th>
+              <div class="separator"></div>
+              <td>
+                <a class="listing-features" [href]="rmCharacter?.url"
+                  >-> Click to see the episode's links <-</a
+                >
+              </td>
             </tr>
-            </div>
+          </div>
         </table>
       </div>
       <div class="details-photo">
-  <img class="listing-photo" [src]="rmCharacter?.image" alt="photo of {{rmCharacter?.name}}">
-  </div> 
-</div>
-  <!-- </article> -->
+        <img
+          class="listing-photo"
+          [src]="rmCharacter?.image"
+          alt="photo of {{ rmCharacter?.name }}"
+        />
+      </div>
+    </div>
+    </div>
   `,
-  styleUrls: ['./details.component.css']
+  styleUrls: ["./details.component.css"],
 })
 export class DetailsComponent {
+  route: ActivatedRoute = inject(ActivatedRoute);
+  housingService = inject(HousingService);
+  housingLocation: HousingLocation | undefined;
 
-  route: ActivatedRoute = inject(ActivatedRoute)
-  housingService = inject(HousingService)
-  housingLocation: HousingLocation | undefined
-
-  rmCharacterService = inject(RMCharactersService)
-  rmCharacter: Character | undefined
-
+  rmCharacterService = inject(RMCharactersService);
+  rmCharacter: Character | undefined;
 
   applyForm = new FormGroup({
-    firstName: new FormControl(''),
-    lastName: new FormControl(''),
-    email: new FormControl('')
-  })
+    firstName: new FormControl(""),
+    lastName: new FormControl(""),
+    email: new FormControl(""),
+  });
 
   submitApplication() {
     this.housingService.submitApplication(
-      this.applyForm.value.firstName ?? '',
-      this.applyForm.value.lastName ?? '',
-      this.applyForm.value.email ?? '',
-    )
+      this.applyForm.value.firstName ?? "",
+      this.applyForm.value.lastName ?? "",
+      this.applyForm.value.email ?? ""
+    );
   }
 
   constructor() {
-    const housingLocationsId = Number(this.route.snapshot.params['id'])
-    this.housingLocation = this.housingService.getHousingLocationsById(housingLocationsId)
+    const housingLocationsId = Number(this.route.snapshot.params["id"]);
+    this.housingLocation =
+      this.housingService.getHousingLocationsById(housingLocationsId);
     if (this.rmCharacter === undefined) {
-      this.loadCharacter()
+      this.loadCharacter();
     }
   }
 
   async loadCharacter() {
     try {
-      const rmCharacterId = Number(this.route.snapshot.params['id'])
+      const rmCharacterId = Number(this.route.snapshot.params["id"]);
 
-      return this.rmCharacter = await this.rmCharacterService.getCharacterById(rmCharacterId)
-
+      return (this.rmCharacter = await this.rmCharacterService.getCharacterById(
+        rmCharacterId
+      ));
     } catch (error) {
-      return error
+      return error;
     }
   }
-
-
 }
